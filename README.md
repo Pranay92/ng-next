@@ -79,6 +79,10 @@ In case of any error, you can also pass an `error` message on the `$scope.next()
 
 The above example is complete enough to understand how the directive would work. However feel free to copy paste only the directive code and add in your app if you don't want to inject dependncy on your main module.
 
+### Note 
+
+You might be wandering what if we call the **same functions** that are in the `list` individually, instead of the directive via `ng-click` (for example `ng-click="validate()"`) on any html element. Well that is just fine. The directive will ignore the `$scope.next()` function invocation when any of the `list` methods are called individually. 
+
 ### Options
 
 1. `ng-pass-event` -- event that will trigger the functions. Defaults to `click`
