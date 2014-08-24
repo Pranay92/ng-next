@@ -1,0 +1,18 @@
+{
+  "name": "ng-next",
+  "main": "ng-next.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Pranay92/ng-next",
+  "authors": [
+    "Pranay Dubey <pranaydubey3009@gmail.com>"
+  ],
+  "description": "AngularJS directory to simulate Express like next() functions, avoiding nested functions write.",
+  "keywords": [
+    "ng-next",
+    "AngularJS"
+  ],
+  "dependencies" : {
+    "angular" : "~1.1.1"
+  }
+  "license": "MIT"
+}
