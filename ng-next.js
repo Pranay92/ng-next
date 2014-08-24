@@ -13,13 +13,13 @@ angular.module('next',[])
                     dispose(err); 
                     return;
                 };
-		if($scope.ngMethod) call();
+		if($scope.nxMethod) call();
             };
 
             var call = function() {
-                var curr = $scope.callingArr[$scope.callingIndex];
+                var curr = $scope.nxCallingArr[$scope.nxCallingIndex];
                 if(curr && $scope[curr]) { 
-                    $scope.callingIndex += 1;
+                    $scope.nxCallingIndex += 1;
                     $scope[curr]();
 		    return;
                 };
@@ -35,10 +35,10 @@ angular.module('next',[])
             };
             
             $elem.bind(event,function() {
-                $scope.callingIndex = 0;
+                $scope.nxCallingIndex = 0;
                 var arr = $attrs.ngPass;
-                $scope.callingArr = $scope[arr];
-                if($scope.callingArr && $scope.callingArr.length) {
+                $scope.nxCallingArr = $scope[arr];
+                if($scope.nxCallingArr && $scope.nxCallingArr.length) {
 		    $scope.nxMethod = true;
 		    call();
 		}; 
