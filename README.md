@@ -4,6 +4,10 @@ ng-next
 AngularJS directive simulating Express.js like next() feature in angularjs.
 
 
+### Install via [Bower](http://bower.io/)
+
+`bower install ng-next`
+
 ## Consider the following code in your controller
 
 
