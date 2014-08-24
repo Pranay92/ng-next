@@ -85,5 +85,5 @@ The above example is complete enough to understand how the directive would work.
 
 2. `ng-pass-err` -- default error handler that will be invoked if any of the function throws err;
 
-### [Demo](http://jsfiddle.net/Pranay/pn405j7q/2/)
+### [Demo](http://jsfiddle.net/Pranay/pn405j7q/7/)
 
