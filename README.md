@@ -29,7 +29,7 @@ angular.module('app',[])
 });
 ````
 
-the above code isn't very complex but one big issue here is all the functions are ** coupled ** with each other. 
+the above code isn't very complex but one big issue here is all the functions are **coupled** with each other. 
 
 **Node** frameworks like **Express** provide a beutiful feature that solves the above problem by invoking the `next()` function. 
 
