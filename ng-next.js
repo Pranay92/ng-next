@@ -13,7 +13,7 @@ angular.module('next',[])
                     dispose(err); 
                     return;
                 };
-                call();
+		if($scope.ngMethod) call();
             };
 
             var call = function() {
@@ -21,11 +21,14 @@ angular.module('next',[])
                 if(curr && $scope[curr]) { 
                     $scope.callingIndex += 1;
                     $scope[curr]();
-                };           
+		    return;
+                };
+		$scope.nxMethod = false;           
             };
 
             var dispose = function(err) {
                 var errHandler = $attrs.ngPassErr;
+		$scope.nxMethod = false;
                 if($scope[errHandler]) {
                     $scope[errHandler](err);
                 };
@@ -35,7 +38,10 @@ angular.module('next',[])
                 $scope.callingIndex = 0;
                 var arr = $attrs.ngPass;
                 $scope.callingArr = $scope[arr];
-                if($scope.callingArr && $scope.callingArr.length) call(); 
+                if($scope.callingArr && $scope.callingArr.length) {
+		    $scope.nxMethod = true;
+		    call();
+		}; 
             });
         }
     }
