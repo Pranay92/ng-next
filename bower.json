@@ -14,5 +14,4 @@
   "dependencies" : {
     "angular" : "~1.1.1"
   }
-  "license": "MIT"
 }
