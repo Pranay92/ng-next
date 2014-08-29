@@ -22,8 +22,8 @@ angular.module('next',[])
                 index += 1;
                 walkThrough(arr,index);
             }
-            walkThrough(arr,index);
-            
+            walkThrough(arr,0);
+
             $scope.next = function(err) {
                 if(err)  {
                     //to be call if an error occured
