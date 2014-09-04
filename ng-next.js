@@ -3,9 +3,8 @@ angular.module('next',[])
     return {
         link : function($scope,$elem,$attrs) {
             var pass = $attrs.ngPass;
-            var arr = $scope[pass];
+            var arr = extractArray(pass);
             var event = $attrs.ngPassEvent || 'click';
-            if(!arr.length) throw new Error('should be an array');
             var len = arr.length;
             /*
                 @swagger this will check for the presence of each element as a
@@ -23,6 +22,27 @@ angular.module('next',[])
                 walkThrough(arr,index);
             }
             walkThrough(arr,0);
+            /*
+                @swagger method that returns the actual array from the argument
+                @args can be passed an array name that exist in the scope OR an array itself that has list of functions
+            */
+            function extractArray(arr) {
+                var arr = arr;
+                if (!arr) throw new Error('Argument passed in at ng-pass cannot be undefined');
+
+                arr = $scope.$eval(arr);
+                
+                if (!arr) throw new Error('Argument passed in at ng-pass does not exist in the current scope');
+
+                var isArray = Array.isArray(arr);
+
+                if(!isArray) throw new Error('Argument passed in at ng-pass must be an array');
+
+                if (!arr.length) throw new Error('Argument passed in at ng-pass cannot be an empty array');
+
+                return arr;
+
+            }
 
             $scope.next = function(err) {
                 if(err)  {
@@ -53,8 +73,8 @@ angular.module('next',[])
             
             $elem.bind(event,function() {
                 $scope.nxCallingIndex = 0;
-                var arr = $attrs.ngPass;
-                $scope.nxCallingArr = $scope[arr];
+                var arr = extractArray($attrs.ngPass);
+                $scope.nxCallingArr = arr;
                 if($scope.nxCallingArr && $scope.nxCallingArr.length) {
 		          $scope.nxMethod = true;
 		          call();
