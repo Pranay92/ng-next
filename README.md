@@ -89,7 +89,11 @@ You might be wandering what if we call the **same functions** that are in the `l
 
 2. `ng-pass-err` -- default error handler that will be invoked if any of the function throws err;
 
-3. `ng-pass` -- the main directive attribute. This needs to be passed a name of an array(that should exist in the current scope) and should contain the list of function names(that are defined in the current scope). 
+3. `ng-pass` -- the main directive attribute. This needs to be passed a name of an array(that should exist in the current scope) and should contain the list of function names(that are defined in the current scope) OR a list of array itself like the following:
+
+`ng-pass="['validate','sanitize']"` 
+
+and each of them should exist in the current `$scope`
 
 ### [Demo](http://jsfiddle.net/pn405j7q/11/)
 
