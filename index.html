@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="ng-next : AngularJS directive simulating Express.js like next() feature in angularjs.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>ng-next</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Pranay92/ng-next">View on GitHub</a>
+
+          <h1 id="project_title">ng-next</h1>
+          <h2 id="project_tagline">AngularJS directive simulating Express.js like next() feature in angularjs.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Pranay92/ng-next/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Pranay92/ng-next/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="ng-next" class="anchor" href="#ng-next"><span class="octicon octicon-link"></span></a>ng-next</h1>
+
+<p>AngularJS directive simulating Express.js like next() feature in angularjs.</p>
+
+<h3>
+<a name="install-via-bower" class="anchor" href="#install-via-bower"><span class="octicon octicon-link"></span></a>Install via <a href="http://bower.io/">Bower</a>
+</h3>
+
+<p><code>bower install ng-next</code></p>
+
+<h2>
+<a name="consider-the-following-code-in-your-controller" class="anchor" href="#consider-the-following-code-in-your-controller"><span class="octicon octicon-link"></span></a>Consider the following code in your controller</h2>
+
+<pre><code>angular.module('app',[])
+    .controller('myCtrl',function($scope) {
+        $scope.post = function() {
+          var valid = $scope.validate();
+          if(valid) $scope.sanitize();
+
+          // http request here
+        };
+
+        $scope.validate = function() {
+
+          // some validation logic here
+        };
+
+        $scope.sanitize = function() {
+
+          //some sanitization logic here
+        };
+});
+</code></pre>
+
+<p>the above code isn't very complex but one big issue here is all the functions are <strong>coupled</strong> with each other. </p>
+
+<p><strong>Node</strong> frameworks like <strong>Express</strong> provide a beutiful feature that solves the above problem by invoking the <code>next()</code> function. </p>
+
+<p>However, AngularJS doesn't comes equipped with something like that, but it turns out that it can be easily implemented with the help of directive.</p>
+
+<h3>
+<a name="by-using-ng-next-you-can-write-the-above-as" class="anchor" href="#by-using-ng-next-you-can-write-the-above-as"><span class="octicon octicon-link"></span></a>By using <code>ng-next</code> you can write the above as:</h3>
+
+<pre><code> angular.module('app',['next']) 
+  .controller('myCtrl',function($scope) { 
+    $scope.list = ['validate','sanitize','post'];
+
+    $scope.post = function() {
+      //only the http request here 
+      $scope.next(); //special function provided by the directive
+    };
+
+    $scope.validate = function() {
+
+      //only validation logic here
+      $scope.next();
+    };
+
+    $scope.sanitize = function() {
+
+      // only sanitization logic here
+      $scope.next();
+    };
+ });
+
+</code></pre>
+
+<p>and on the <code>element</code> you can simply pass</p>
+
+<p><code>&lt;button ng-pass="list"&gt; Press &lt;/button&gt;</code></p>
+
+<p>this will search for a array containing a list of functions in the <code>current scope</code> and will call each of them in the sequence they are added in the array.</p>
+
+<p>In case of any error, you can also pass an <code>error</code> message on the <code>$scope.next()</code> function invocation as an argument. This will stop executing the succeeding functions in the list and will call the default error handler(if defined) for the function.</p>
+
+<h3>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<p>The above example is complete enough to understand how the directive would work. However feel free to copy paste only the directive code and add in your app if you don't want to inject dependncy on your main module.</p>
+
+<h3>
+<a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>Note</h3>
+
+<p>You might be wandering what if we call the <strong>same functions</strong> that are in the <code>list</code> individually, instead of the directive via <code>ng-click</code> (for example <code>ng-click="validate()"</code>) on any html element. Well that is just fine. The directive will ignore the <code>$scope.next()</code> function invocation when any of the <code>list</code> methods are called individually. </p>
+
+<h3>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h3>
+
+<ol>
+<li><p><code>ng-pass-event</code> -- event that will trigger the functions. Defaults to <code>click</code></p></li>
+<li><p><code>ng-pass-err</code> -- default error handler that will be invoked if any of the function throws err;</p></li>
+<li><p><code>ng-pass</code> -- the main directive attribute. This needs to be passed a name of an array(that should exist in the current scope) and should contain the list of function names(that are defined in the current scope) OR a list of array itself like the following:</p></li>
+</ol><p><code>ng-pass="['validate','sanitize']"</code> </p>
+
+<p>and each of them should exist in the current <code>$scope</code></p>
+
+<h3>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a><a href="http://jsfiddle.net/pn405j7q/11/">Demo</a>
+</h3>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">ng-next maintained by <a href="https://github.com/Pranay92">Pranay92</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
