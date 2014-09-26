@@ -1,6 +1,6 @@
 {
   "name": "ng-next",
-  "main": "ng-next.js",
+  "main": "ng-next.min.js",
   "version": "0.0.1",
   "homepage": "https://github.com/Pranay92/ng-next",
   "authors": [
