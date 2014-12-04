@@ -15,8 +15,9 @@ angular.module('next',[])
                 if(index === arr.length) return;
                 var curr = $scope[arr[index]];
                 if(typeof curr !== 'function') {
+                    var currParam = arr[index];
                     var memberType = typeof curr;
-                    throw new Error(curr + ' should be a function but instead found ' + memberType);  
+                    throw new Error(currParam + ' should be a function but instead found ' + memberType);  
                 } 
                 index += 1;
                 walkThrough(arr,index);
