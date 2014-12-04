@@ -7,7 +7,9 @@ angular.module('next',[])
       var arr = extractArray(pass);
       var event = $attrs.ngPassEvent || 'click';
       var len = arr.length;
-      
+      var reverseEnabled = $attrs.ngPassReverse ? true : false;
+      var indexToMove;
+
       /*
         the following will loop through each element of the array,
         throws error if any of them is'nt a function
@@ -68,7 +70,8 @@ angular.module('next',[])
 
         var curr = $scope.nxCallingArr[$scope.nxCallingIndex];
         if(curr && $scope[curr]) { 
-          $scope.nxCallingIndex += 1;
+          indexToMove = reverseEnabled ? (-1) : 1;
+          $scope.nxCallingIndex += (indexToMove);
           $scope[curr]();
           return;
         }
@@ -93,9 +96,11 @@ angular.module('next',[])
       */
       $elem.bind(event,function() {
         
-        $scope.nxCallingIndex = 0;
+        
         var arr = extractArray($attrs.ngPass);
         $scope.nxCallingArr = arr;
+        $scope.nxCallingIndex = reverseEnabled ? ($scope.nxCallingArr.length - 1) : 0;
+
         if($scope.nxCallingArr && $scope.nxCallingArr.length) {
           $scope.nxMethod = true;
           call();
