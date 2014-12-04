@@ -3,6 +3,7 @@ ng-next
 
 AngularJS directive simulating Express.js like next() feature in angularjs.
 
+### [Demo](http://jsfiddle.net/pn405j7q/12/)
 
 ### Install via [Bower](http://bower.io/)
 
@@ -95,5 +96,5 @@ You might be wandering what if we call the **same functions** that are in the `l
 
 and each of them should exist in the current `$scope`
 
-### [Demo](http://jsfiddle.net/pn405j7q/11/)
+
 
