@@ -7,7 +7,7 @@ angular.module('next',[])
       var arr = extractArray(pass);
       var event = $attrs.ngPassEvent || 'click';
       var len = arr.length;
-      var reverseEnabled = $attrs.ngPassReverse ? true : false;
+      var reverseEnabled = $attrs.hasOwnProperty('ngPassReverse') ? true : false;
       var indexToMove;
 
       /*
