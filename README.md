@@ -3,7 +3,7 @@ ng-next
 
 AngularJS directive simulating Express.js like next() feature in angularjs.
 
-### [Demo](http://jsfiddle.net/pn405j7q/12/)
+### [Demo](http://jsfiddle.net/pn405j7q/22/)
 
 ### Install via [Bower](http://bower.io/)
 
