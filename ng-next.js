@@ -7,8 +7,6 @@ angular.module('next',[])
       var arr = extractArray(pass);
       var event = $attrs.ngPassEvent || 'click';
       var len = arr.length;
-      var reverseEnabled = $attrs.hasOwnProperty('ngPassReverse') ? true : false;
-      var indexToMove;
 
       /*
         the following will loop through each element of the array,
@@ -25,6 +23,11 @@ angular.module('next',[])
         index += 1;
         walkThrough(arr,index);
 
+      }
+
+      var reverseEnabled = function() {
+        var enabled = $attrs.hasOwnProperty('ngPassReverse') ? true : false;
+        return enabled;
       }
 
       // immediately invoke the walkthrough on the element on directive load
@@ -69,12 +72,13 @@ angular.module('next',[])
       var call = function() {
 
         var curr = $scope.nxCallingArr[$scope.nxCallingIndex];
+
         if(curr && $scope[curr]) { 
-          indexToMove = reverseEnabled ? (-1) : 1;
-          $scope.nxCallingIndex += (indexToMove);
+          $scope.nxCallingIndex += ($scope.indexToMove);
           $scope[curr]();
           return;
         }
+
         $scope.nxMethod = false;
 
       };
@@ -96,10 +100,10 @@ angular.module('next',[])
       */
       $elem.bind(event,function() {
         
-        
         var arr = extractArray($attrs.ngPass);
         $scope.nxCallingArr = arr;
-        $scope.nxCallingIndex = reverseEnabled ? ($scope.nxCallingArr.length - 1) : 0;
+        $scope.nxCallingIndex = reverseEnabled() ? ($scope.nxCallingArr.length - 1) : 0;
+        $scope.indexToMove = reverseEnabled() ? -1 : 1 ;
 
         if($scope.nxCallingArr && $scope.nxCallingArr.length) {
           $scope.nxMethod = true;
