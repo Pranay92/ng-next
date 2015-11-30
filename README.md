@@ -96,5 +96,8 @@ You might be wandering what if we call the **same functions** that are in the `l
 
 and each of them should exist in the current `$scope`
 
+### TODOS
 
+1. Make it available via CDN.
+2. Work on decreasing file size.
 
